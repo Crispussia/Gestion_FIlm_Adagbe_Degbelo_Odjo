@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "576062770744",
+    "firebase_url": "https://film-ae528-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "film-ae528",
+    "storage_bucket": "film-ae528.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576062770744:android:70ee0f86ee2d12263e20cd",
+        "android_client_info": {
+          "package_name": "fi.eilco.android_project_gestion_film"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576062770744-k5v557e1tidbg7vt926lg5ubv1n9oav8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBej6WbpniHBfsqvR2GmhdRjQ0XT71aw2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576062770744-k5v557e1tidbg7vt926lg5ubv1n9oav8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Movie Wiki</string>
+
+    <!-- Splash Page -->
+    <string name="app_description">What do you want to know about movies ?</string>
+    <string name="get_started_button">Get started</string>
+
+    <!-- Sign In page -->
+    <string name="sign_page_title">Welcome back !</string>
+    <string name="sign_input_username_title">Username</string>
+    <string name="sign_input_password_title">Password</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="sign_up_button">Sign Up</string>
+
+    <!-- Sign Up page -->
+    <string name="sign_input_confirm_password_title">Confirm Password</string>
+
+    <!-- Main screen -->
+    <string name="genre_name">Action</string>
+    <string name="item_movie_title">Le Soliste</string>
+    <string name="item_movie_rate">Rate : </string>
+    <string name="item_movie_votes">Votes : </string>
+
+    <!-- Genres Screen -->
+    <string name="menu_title">Genres</string>
+
+    <!-- Favorite -->
+    <string name="favorite_screen_title">Favorite Movies</string>
+
+    <!-- Display Movie Card Screen -->
+    <string name="card_movie_title">@string/item_movie_title</string>
+    <string name="card_movie_overview">Overview : </string>
+    <string name="card_movie_popularity">Popularity : </string>
+    <string name="card_movie_release_date">Release date : </string>
+    <string name="card_movie_vote_average">Vote average : </string>
+    <string name="card_movie_vote_count">Vote count : </string>
+
+    <!-- Account Screen -->
+    <string name="account_favorites_count_title">Favorites count : </string>
+    <string name="log_out_button">Log out</string>
+
+
+    <string name="content_description">Film Image</string>
+
+</resources>
