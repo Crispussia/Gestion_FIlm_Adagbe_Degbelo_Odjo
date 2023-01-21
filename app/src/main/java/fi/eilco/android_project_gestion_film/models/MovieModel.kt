@@ -11,6 +11,8 @@ class MovieModel(
     var rate: String = "Rate : ",
     var votes: String = "Votes : ",
     var id:Int=0,
+    var popularity:String=""
+
 
 
 )

@@ -6,7 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,12 +26,16 @@ import okhttp3.*
 import java.io.IOException
 
 class HomeFragment(private val context: MainActivity, private val username: TextView): Fragment() {
+    private lateinit var s: SearchView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater?.inflate(R.layout.fragment_home, container, false)
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
-        Log.d("recycler : ","tttttttttttttttttttttttttttttt")
+        if (view != null) {
+            s=view.findViewById(R.id.movie_search)
+        }
 
         lifecycleScope.launch {
             if (recycler != null) {
@@ -35,7 +43,6 @@ class HomeFragment(private val context: MainActivity, private val username: Text
             }
         }
 
-        Log.d("recycler : ","lllllllllllllllllllllllllll")
 
 
 
@@ -51,9 +58,6 @@ class HomeFragment(private val context: MainActivity, private val username: Text
 
             setFragmentResultListener("secret2") { key, bundle ->
                 genreName = bundle.getString("genre_name").toString()
-
-                Log.d("hhjjjjjjjjjjjj", "eeeeeeeemmmmmmmmmmmmmmmm " + genreId.toString())
-                Log.d("hhjjjjjjjjjjjj", "eeeeeeeemmmmmmmmmmmmmmmm " + genreName)
 
 
                 val client = OkHttpClient()
@@ -71,14 +75,28 @@ class HomeFragment(private val context: MainActivity, private val username: Text
                         println(body)
                         val gson = GsonBuilder().create()
                         val data = gson.fromJson(body, RootModel::class.java)
-                        Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeeeeeeeeeeeeeee")
+                        Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeehommmmme" +
+                                "")
 
                         //Set adapter and recycler view on UI with values get from http request
                         activity?.runOnUiThread {
                             recyclerView.layoutManager = LinearLayoutManager(context)
 
-                            val adapter = MovieAdapter(context, data.results,username)
+                            val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)
                             recyclerView.adapter = adapter
+
+                            //Function for getting search value
+                            s.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                                override fun onQueryTextSubmit(query: String?): Boolean {
+                                    return false
+                                }
+                                //Filter recycler view values
+                                override fun onQueryTextChange(newText: String?): Boolean {
+                                    adapter.filter.filter(newText)
+                                    return false
+                                }
+
+                            })
                         }
 
                     }
@@ -88,5 +106,19 @@ class HomeFragment(private val context: MainActivity, private val username: Text
 
             }
         }
+    }
+    fun onClick( movieID: Int,movieName: String) {
+
+        setFragmentResult("detailID", bundleOf("genre_id" to movieID))
+        setFragmentResult("detailName", bundleOf("genre_name" to movieName))
+
+
+        val fragmentTransaction=this.parentFragmentManager.beginTransaction()
+
+        fragmentTransaction.replace(R.id.fragment_container,DetailFragment(context,username))
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        fragmentTransaction.addToBackStack(null)
+
+        fragmentTransaction.commit()
     }
 }

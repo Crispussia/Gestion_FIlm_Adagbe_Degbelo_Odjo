@@ -6,18 +6,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
 import fi.eilco.android_project_gestion_film.*
 import fi.eilco.android_project_gestion_film.R
+import fi.eilco.android_project_gestion_film.fragments.DetailFragment
+import fi.eilco.android_project_gestion_film.fragments.GenreFragment
+import fi.eilco.android_project_gestion_film.fragments.HomeFragment
+import fi.eilco.android_project_gestion_film.models.GenreModel
 import fi.eilco.android_project_gestion_film.models.MovieModel
 import fi.eilco.android_project_gestion_film.models.UserModel
+import java.util.*
+import kotlin.collections.ArrayList
 
-class MovieAdapter(private val context: MainActivity, private val movieList:List<MovieModel>, private val username: TextView): RecyclerView.Adapter<MovieAdapter.ViewHolder> (){
+class MovieAdapter(private val context: MainActivity, private val movieList:List<MovieModel>, private val username: TextView, private val movieContext: HomeFragment): RecyclerView.Adapter<MovieAdapter.ViewHolder> (),
+    Filterable {
+    var movieFilterList = movieList
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val movieImage=view.findViewById<ImageView>(R.id.image_item)
@@ -36,7 +42,7 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //Récupérer les information d'un film
-        val currentMovie=movieList[position]
+        val currentMovie=movieFilterList[position]
 
         //utiliser glide pour récupérer l'image du film à partir de son lien
         Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+currentMovie.poster_path)).into(holder.movieImage)
@@ -44,6 +50,16 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
         holder.movieName.text=currentMovie.original_title
         holder.movieRate.text=holder.movieRate.text.toString()+currentMovie.vote_average
         holder.movieVotes.text=holder.movieVotes.text.toString()+currentMovie.vote_count
+
+        holder.movieName.setOnClickListener{
+
+            movieContext.onClick(currentMovie.id,currentMovie.original_title)
+        }
+
+
+
+
+
 
         val databaseRef= FirebaseDatabase.getInstance().getReference("users").child(username.text.toString())
         //On récupère les éléments likes de la BD pour un utilisateur connecté
@@ -172,10 +188,13 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
     }
 
     override fun getItemCount(): Int {
-        return movieList.size //compte le nombre de film
+        return movieFilterList.size //compte le nombre de film
     }
 
-    //On met à jour l'utilisateur ainsi que la nouvelle liste
+
+
+
+        //On met à jour l'utilisateur ainsi que la nouvelle liste
     fun updateUser(username: TextView,liked:MutableList<Int>){
         val databaseRef= FirebaseDatabase.getInstance().getReference("users")
         databaseRef.addValueEventListener(object : ValueEventListener {
@@ -201,4 +220,34 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
         })
 
     }
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    movieFilterList = movieList
+                } else {
+                    val resultList = ArrayList<MovieModel>()
+                    for (row in movieList) {
+                        if (row.original_title.lowercase(Locale.ROOT)
+                                .contains(charSearch.lowercase(Locale.ROOT))
+                        ) {
+                            resultList.add(row)
+                        }
+                    }
+                    movieFilterList = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = movieFilterList
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                movieFilterList = results?.values as ArrayList<MovieModel>
+                notifyDataSetChanged()
+            }
+
+        }
+    }
+
 }

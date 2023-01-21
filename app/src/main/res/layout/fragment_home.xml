@@ -3,9 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/movie_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textCursorDrawable="@null"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vertical_recycler_view"
         android:layout_width="match_parent"

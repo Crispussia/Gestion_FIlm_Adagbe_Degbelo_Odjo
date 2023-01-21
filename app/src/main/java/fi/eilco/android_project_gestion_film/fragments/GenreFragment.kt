@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -26,12 +27,16 @@ import okhttp3.*
 import java.io.IOException
 
 class GenreFragment(private val context: MainActivity, private val username: TextView): Fragment() {
+
+    private lateinit var s: SearchView
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_genre, container, false)
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.recycler_genre)
-        Log.d("recycler : ","tttttttttttttttttttttttttttttt")
+         s=view.findViewById(R.id.genre_search)
 
         lifecycleScope.launch {
             if (recycler != null) {
@@ -46,7 +51,6 @@ class GenreFragment(private val context: MainActivity, private val username: Tex
     }
 
     private fun getData(recyclerView: RecyclerView) {
-        Log.d("recycler : ","gggggggggggggggggggggggggg")
 
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -63,7 +67,6 @@ class GenreFragment(private val context: MainActivity, private val username: Tex
                 println(body)
                 val gson = GsonBuilder().create()
                 val data = gson.fromJson(body, GenreRoot::class.java)
-                Log.d("hhjjjjjjjjjjjj","eeeeeeeeeeeeeeeeeeeeeee77777")
 
                 //Set adapter and recycler view on UI with values get from http request
                 activity?.runOnUiThread {
@@ -71,6 +74,20 @@ class GenreFragment(private val context: MainActivity, private val username: Tex
 
                     val adapter = GenreAdapter(context, data.genres,this@GenreFragment)
                     recyclerView.adapter = adapter
+
+                    //Function for getting search value
+                    s.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            return false
+                        }
+                        //Filter recycler view values
+                        override fun onQueryTextChange(newText: String?): Boolean {
+                            adapter.filter.filter(newText)
+                            return false
+                        }
+
+                    })
+
                 }
 
             }
