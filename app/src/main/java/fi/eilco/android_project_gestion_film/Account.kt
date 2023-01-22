@@ -20,7 +20,7 @@ class Account : AppCompatActivity() {
         setContentView(R.layout.activity_account)
         val username=findViewById<TextView>(R.id.username_valeur)
         val nombre_favoris=findViewById<TextView>(R.id.favoris_count_val)
-        val favorisButton=findViewById<ImageView>(R.id.ic_heart_empty)
+
         val deconnectButton=findViewById<AppCompatButton>(R.id.deconnection)
         val intentUser=intent.getStringExtra("username")
 
@@ -30,7 +30,7 @@ class Account : AppCompatActivity() {
 
         Log.d("Marche",likedlist.toString())
         nombre_favoris.text=likedlist.size.toString()
-        if (likedlist.size==0){
+        /*if (likedlist.size==0){
             favorisButton.setImageResource(R.drawable.ic_unlike)
         }else{
             favorisButton.setImageResource(R.drawable.ic_like)
@@ -45,7 +45,7 @@ class Account : AppCompatActivity() {
             }else{
 
             }
-        }
+        }*/
         deconnectButton.setOnClickListener{
             val intentMain = Intent(this@Account, MainActivity::class.java)
             intentMain.apply {
