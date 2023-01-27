@@ -32,11 +32,14 @@ class HomeFragment(private val context: MainActivity, private val username: Text
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater?.inflate(R.layout.fragment_home, container, false)
+        val view2 = inflater?.inflate(R.layout.activity_main, container, false)
+
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
         recycler?.addItemDecoration(ItemCardFilmDecoration())
-        if (view != null) {
-           s=view.findViewById(R.id.movie_search)
+
+        if (view2 != null) {
+           s=view2.findViewById(R.id.movie_search)
         }
 
         lifecycleScope.launch {
@@ -72,6 +75,7 @@ class HomeFragment(private val context: MainActivity, private val username: Text
                         e.printStackTrace()
                     }
 
+
                     override fun onResponse(call: Call, response: Response) {
                         val body = response.body?.string()
                         println(body)
@@ -86,7 +90,7 @@ class HomeFragment(private val context: MainActivity, private val username: Text
 
                             val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)
                             recyclerView.adapter = adapter
-
+                            /*
                             //Function for getting search value
                             s.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                                 override fun onQueryTextSubmit(query: String?): Boolean {
@@ -98,7 +102,7 @@ class HomeFragment(private val context: MainActivity, private val username: Text
                                     return false
                                 }
 
-                            })
+                            })*/
                         }
 
                     }

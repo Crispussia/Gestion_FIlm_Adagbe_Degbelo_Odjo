@@ -11,28 +11,14 @@
         android:id="@+id/connectValide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:src="@drawable/ic_uservalide"
-        android:visibility="gone"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:contentDescription="@string/content_description"
+        android:src="@drawable/ic_uservalide"
+        android:text="@string/app_name"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <TextView
-        android:id="@+id/textuser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="-2dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/favoris_user_page"
@@ -74,6 +60,21 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="16dp" />
 
+    <TextView
+        android:id="@+id/textuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="-2dp" />
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -99,10 +100,10 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.757">
+        app:layout_constraintVertical_bias="0.818">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/current_genre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/second_blue"
@@ -119,6 +120,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/montserrat_semibold"
         android:text="@string/app_name"
         android:textColor="@color/second_blue"
@@ -128,26 +130,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textuser"
-        app:layout_constraintVertical_bias="0.762" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.911" />
 
     <ImageView
         android:id="@+id/menu_burger"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:contentDescription="@string/content_description"
         android:padding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textuser"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_menu" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@drawable/ic_menu"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/connect"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:contentDescription="@string/content_description"
         app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"
@@ -161,6 +166,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/content_description"
         app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.778"
@@ -169,16 +175,32 @@
         app:layout_constraintVertical_bias="0.014"
         app:srcCompat="@drawable/ic_heart_filled" />
 
-    <SearchView
-        android:id="@+id/movie_search"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:searchIcon="@drawable/ic_search"
-        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+    <androidx.cardview.widget.CardView
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardUseCompatPadding="false"
+        app:contentPaddingBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintHorizontal_bias="0.341"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textuser"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.389">
+
+        <SearchView
+            android:id="@+id/movie_search"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="end"
+
+            android:queryBackground="@android:color/transparent"
+            android:searchIcon="@drawable/ic_search">
+
+
+        </SearchView>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
