@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
 import fi.eilco.android_project_gestion_film.MainActivity
 import fi.eilco.android_project_gestion_film.R
+import fi.eilco.android_project_gestion_film.adapter.ItemCardFilmDecoration
 import fi.eilco.android_project_gestion_film.adapter.MovieAdapter
 import fi.eilco.android_project_gestion_film.models.RootModel
 
@@ -33,8 +34,9 @@ class HomeFragment(private val context: MainActivity, private val username: Text
         val view = inflater?.inflate(R.layout.fragment_home, container, false)
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
+        recycler?.addItemDecoration(ItemCardFilmDecoration())
         if (view != null) {
-            s=view.findViewById(R.id.movie_search)
+           s=view.findViewById(R.id.movie_search)
         }
 
         lifecycleScope.launch {

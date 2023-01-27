@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="35dp"
+        app:cardElevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -58,18 +59,18 @@
 
             <TextView
                 android:id="@+id/item_movie_title"
-                android:layout_width="wrap_content"
+                android:layout_width="199dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/item_movie_title"
                 android:textColor="@color/second_blue"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.141"
+                app:layout_constraintEnd_toStartOf="@+id/cardView"
+                app:layout_constraintHorizontal_bias="0.507"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.092" />
+                app:layout_constraintVertical_bias="0.084" />
 
             <TextView
                 android:id="@+id/item_movie_rate"
@@ -78,7 +79,7 @@
                 android:fontFamily="@font/montserrat_light"
                 android:text="@string/item_movie_rate"
                 android:textColor="@color/second_blue"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.092"
@@ -93,7 +94,7 @@
                 android:fontFamily="@font/montserrat_light"
                 android:text="@string/item_movie_votes"
                 android:textColor="@color/second_blue"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -112,7 +113,7 @@
                 app:layout_constraintHorizontal_bias="0.913"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.627"
+                app:layout_constraintVertical_bias="0.568"
                 app:srcCompat="@drawable/ic_unlike" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
