@@ -82,7 +82,9 @@ class MainActivity : AppCompatActivity() {
 
         }
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, HomeFragment(this, username))
+       // transaction.replace(R.id.fragment_container, HomeFragment(this, username))
+        transaction.replace(R.id.fragment_container, GenreFragment(this, username))
+
         transaction.addToBackStack(null)
         transaction.commit()
         connectButton.setOnClickListener{
