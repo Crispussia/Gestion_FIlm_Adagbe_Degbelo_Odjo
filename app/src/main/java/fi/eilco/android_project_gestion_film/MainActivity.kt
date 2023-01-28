@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import com.google.firebase.database.*
 import fi.eilco.android_project_gestion_film.fragments.FavoriteFragment
 import fi.eilco.android_project_gestion_film.fragments.GenreFragment
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val connectButton=findViewById<ImageView>(R.id.connect)
         //charger notre plant repository
         //injecter le fragment dans la boite (fragment_container)
+        //val s=findViewById<SearchView>(R.id.movie_search)
 
         val username=findViewById<TextView>(R.id.textuser)
         val favorisButton=findViewById<ImageView>(R.id.favoris)
@@ -91,5 +93,8 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+
+
 
 }

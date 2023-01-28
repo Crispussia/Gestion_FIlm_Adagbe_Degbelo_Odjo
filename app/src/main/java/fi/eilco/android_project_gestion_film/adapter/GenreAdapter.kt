@@ -23,6 +23,7 @@ class GenreAdapter (private val context: MainActivity, private  val genreList:Li
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val genreName = view.findViewById<TextView>(R.id.genre_name)
+        val genreTitle=view.findViewById<TextView>(R.id.current_genre)
 
 
     }

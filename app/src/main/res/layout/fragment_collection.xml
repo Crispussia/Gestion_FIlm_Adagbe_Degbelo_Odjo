@@ -3,12 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.appcompat.widget.SearchView
+   <!-- <androidx.appcompat.widget.SearchView
         android:id="@+id/favorite_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textCursorDrawable="@null"
-        />
+        />-->
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/collection_recycler_list"
     android:layout_width="match_parent"

@@ -36,7 +36,7 @@ class GenreFragment(private val context: MainActivity, private val username: Tex
         val view = inflater.inflate(R.layout.fragment_genre, container, false)
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.recycler_genre)
-         s=view.findViewById(R.id.genre_search)
+         //s=view.findViewById(R.id.genre_search)
 
         lifecycleScope.launch {
             if (recycler != null) {
@@ -76,7 +76,7 @@ class GenreFragment(private val context: MainActivity, private val username: Tex
                     recyclerView.adapter = adapter
 
                     //Function for getting search value
-                    s.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+                    /*s.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
                         override fun onQueryTextSubmit(query: String?): Boolean {
                             return false
                         }
@@ -86,7 +86,7 @@ class GenreFragment(private val context: MainActivity, private val username: Tex
                             return false
                         }
 
-                    })
+                    })*/
 
                 }
 

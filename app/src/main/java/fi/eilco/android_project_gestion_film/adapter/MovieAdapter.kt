@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
@@ -31,6 +32,8 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
         val movieRate=view.findViewById<TextView>(R.id.item_movie_rate)
         val movieVotes=view.findViewById<TextView>(R.id.item_movie_votes)
         val likeIcon=view.findViewById<ImageView>(R.id.ic_heart_empty)
+        val card=view.findViewById<CardView>(R.id.main_card_view)
+
 
     }
     @SuppressLint("MissingInflatedId")
@@ -48,10 +51,10 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
         Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+currentMovie.poster_path)).into(holder.movieImage)
 
         holder.movieName.text=currentMovie.original_title
-        holder.movieRate.text=holder.movieRate.text.toString()+currentMovie.vote_average
-        holder.movieVotes.text=holder.movieVotes.text.toString()+currentMovie.vote_count
+        holder.movieRate.text=holder.movieRate.text.toString()+" "+currentMovie.vote_average
+        holder.movieVotes.text=holder.movieVotes.text.toString()+" "+currentMovie.vote_count
 
-        holder.movieName.setOnClickListener{
+        holder.card.setOnClickListener{
 
             movieContext.onClick(currentMovie.id,currentMovie.original_title)
         }

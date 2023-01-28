@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,9 +39,9 @@ class FavoriteFragment (
         val view = inflater?.inflate(R.layout.fragment_collection, container, false)
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.collection_recycler_list)
-        if (view != null) {
+       /* if (view != null) {
             s=view.findViewById(R.id.favorite_search)
-        }
+        }*/
 
         //recycler?.adapter=FavoriteAdapter(context,likedList,username)
         recycler?.layoutManager= LinearLayoutManager(context)
@@ -78,11 +81,12 @@ class FavoriteFragment (
                 activity?.runOnUiThread {
                     recyclerView.layoutManager= LinearLayoutManager(context)
 
-                    val adapter = FavoriteAdapter(context,likedList,username,movieList)
+                    val adapter = FavoriteAdapter(context,likedList,username,movieList,this@FavoriteFragment)
+
                     recyclerView.adapter = adapter
 
                     //Function for getting search value
-                    s.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+                   /* s.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
                         override fun onQueryTextSubmit(query: String?): Boolean {
                             return false
                         }
@@ -92,7 +96,7 @@ class FavoriteFragment (
                             return false
                         }
 
-                    })
+                    })*/
 
                 }
 
@@ -100,6 +104,20 @@ class FavoriteFragment (
 
         })}
 
+    }
+    fun onClick( movieID: Int,movieName: String) {
+
+        setFragmentResult("detailID", bundleOf("genre_id" to movieID))
+        setFragmentResult("detailName", bundleOf("genre_name" to movieName))
+
+
+        val fragmentTransaction=this.parentFragmentManager.beginTransaction()
+
+        fragmentTransaction.replace(R.id.fragment_container,DetailFragment(context,username))
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        fragmentTransaction.addToBackStack(null)
+
+        fragmentTransaction.commit()
     }
 
 }

@@ -9,12 +9,14 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
 import fi.eilco.android_project_gestion_film.FilmRepository
 import fi.eilco.android_project_gestion_film.MainActivity
 import fi.eilco.android_project_gestion_film.R
+import fi.eilco.android_project_gestion_film.fragments.FavoriteFragment
 import fi.eilco.android_project_gestion_film.models.GenreModel
 import fi.eilco.android_project_gestion_film.models.MovieModel
 import fi.eilco.android_project_gestion_film.models.UserModel
@@ -23,7 +25,8 @@ import kotlin.collections.ArrayList
 
 class FavoriteAdapter (
     private  val context: MainActivity,
-    private val likedList : MutableList<Int>,private val username: TextView, private val movieList:List<MovieModel>): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>()/*,
+    private val likedList : MutableList<Int>,private val username: TextView, private val movieList:List<MovieModel>,private val favoriteContext: FavoriteFragment
+): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>()/*,
     Filterable */{
     var favoriteFilterList = movieList
 
@@ -39,6 +42,7 @@ class FavoriteAdapter (
         val movieRate=view.findViewById<TextView>(R.id.item_movie_rate)
         val movieVotes=view.findViewById<TextView>(R.id.item_movie_votes)
         val likeIcon=view.findViewById<ImageView>(R.id.ic_heart_empty)
+        val card=view.findViewById<CardView>(R.id.main_card_view)
 
         //val textUser=view.findViewById<TextView>(R.id.textuser)
 
@@ -55,6 +59,9 @@ class FavoriteAdapter (
         Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+currentFilm.poster_path)).into(holder.movieImage)
 
         holder.movieName.text=currentFilm.original_title
+        holder.movieRate.text=holder.movieRate.text.toString()+" "+currentFilm.vote_average
+        holder.movieVotes.text=holder.movieVotes.text.toString()+" "+currentFilm.vote_count
+
         holder.likeIcon.setImageResource(R.drawable.ic_like)
         //rajouter une interaction sur cette étoile
         holder.likeIcon.setOnClickListener{
@@ -66,6 +73,10 @@ class FavoriteAdapter (
             updateLikeList(username,likedList)
 
 
+        }
+        holder.card.setOnClickListener{
+
+            favoriteContext.onClick(currentFilm.id,currentFilm.original_title)
         }
 
     }

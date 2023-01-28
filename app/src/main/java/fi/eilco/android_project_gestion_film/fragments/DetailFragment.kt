@@ -37,6 +37,12 @@ class DetailFragment (private val context: MainActivity, private val username: T
     private lateinit var title: TextView
     private lateinit var like: ImageView
 
+    private lateinit var popularity:TextView
+    private lateinit var realeseDate:TextView
+    private lateinit var rate:TextView
+    private lateinit var votes:TextView
+
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -48,6 +54,11 @@ class DetailFragment (private val context: MainActivity, private val username: T
             movieImage= view.findViewById(R.id.image_detail)
             overview=view.findViewById(R.id.overwiew)
             title=view.findViewById(R.id.item_detail_title)
+            popularity=view.findViewById(R.id.popularity)
+            rate=view.findViewById(R.id.item_detail_rate)
+            realeseDate=view.findViewById(R.id.release_date)
+            votes=view.findViewById(R.id.item_detail_votes)
+
             like=view.findViewById(R.id.ic_heart_empty)
         }
         lifecycleScope.launch {
@@ -82,6 +93,7 @@ class DetailFragment (private val context: MainActivity, private val username: T
                         e.printStackTrace()
                     }
 
+                    @SuppressLint("SetTextI18n")
                     override fun onResponse(call: Call, response: Response) {
                         val body = response.body?.string()
                         println(body)
@@ -91,6 +103,10 @@ class DetailFragment (private val context: MainActivity, private val username: T
                         //Set adapter and recycler view on UI with values get from http request
                         activity?.runOnUiThread {
                             title.text=data.original_title
+                            popularity.text=popularity.text.toString() + data.popularity
+                            realeseDate.text=realeseDate.text.toString()+data.release_date
+                            rate.text=rate.text.toString()+data.vote_average
+                            votes.text= votes.text.toString()+data.vote_count
                             Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+data.poster_path)).into(movieImage)
                             overview.text=overview.text.toString() + "\n"+data.overview
                             if (username.text.toString()!=""){

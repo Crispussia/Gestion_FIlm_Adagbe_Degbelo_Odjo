@@ -4,7 +4,7 @@ class MovieModel(
     var original_title: String = "",
     var overview: String = "",
     var poster_path: String = "",
-    var releaseDate: String = "",
+    var release_date: String = "",
     var vote_average: String = "",
     var vote_count: String = "",
     var imageLink: String = "",

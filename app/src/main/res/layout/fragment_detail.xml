@@ -72,18 +72,48 @@
                 app:layout_constraintVertical_bias="0.092" />
 
             <TextView
+                android:id="@+id/popularity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="Popularity : "
+                android:textColor="@color/second_blue"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/item_detail_votes"
+                app:layout_constraintTop_toBottomOf="@+id/item_detail_title"
+                app:layout_constraintVertical_bias="0.297" />
+            <TextView
+                android:id="@+id/release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="Realease date : "
+                android:textColor="@color/second_blue"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/popularity"
+                app:layout_constraintTop_toBottomOf="@+id/popularity"
+                app:layout_constraintVertical_bias="0.297" />
+
+
+            <TextView
                 android:id="@+id/item_detail_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_light"
-                android:text="@string/item_movie_rate"
+                android:text="Votes average : "
                 android:textColor="@color/second_blue"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.092"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_detail_title"
+                app:layout_constraintTop_toBottomOf="@+id/release_date"
                 app:layout_constraintVertical_bias="0.241" />
 
             <TextView
@@ -91,15 +121,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_light"
-                android:text="@string/item_movie_votes"
+                android:text="Vote count : "
                 android:textColor="@color/second_blue"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/item_detail_rate"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_detail_rate"
                 app:layout_constraintVertical_bias="0.297" />
+
+
 
             <ImageView
                 android:id="@+id/ic_heart_empty"
@@ -118,6 +150,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/overwiew"
         android:layout_width="wrap_content"
