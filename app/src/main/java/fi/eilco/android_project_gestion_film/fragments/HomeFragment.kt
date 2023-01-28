@@ -57,12 +57,47 @@ class HomeFragment(private val context: MainActivity, private val username: Text
 
     private fun getData(recyclerView: RecyclerView) {
 
-        var genreId: Int = 0
+        var genreId: Int = -1
         var genreName: String = ""
         //s= context.findViewById(R.id.movie_search)
 
+        if (genreId==-1){
+            val client = OkHttpClient()
+            val request = Request.Builder()
+                .url("https://api.themoviedb.org/3/discover/movie?api_key=2174d146bb9c0eab47529b2e77d6b526&with_genres=28")
+                .build()
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                    e.printStackTrace()
+                }
+
+
+                override fun onResponse(call: Call, response: Response) {
+                    val body = response.body?.string()
+                    println(body)
+                    val gson = GsonBuilder().create()
+                    val data = gson.fromJson(body, RootModel::class.java)
+
+                    //Set adapter and recycler view on UI with values get from http request
+                    activity?.runOnUiThread {
+                        recyclerView.layoutManager = LinearLayoutManager(context)
+
+                        val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)
+                        recyclerView.adapter = adapter
+
+                    }
+
+                }
+
+            })
+
+        }
+
+        Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeehommmmmehhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"+genreId.toString())
         setFragmentResultListener("secret") { key, bundle ->
             genreId = bundle.getInt("genre_id")
+
 
             setFragmentResultListener("secret2") { key, bundle ->
                 genreName = bundle.getString("genre_name").toString()

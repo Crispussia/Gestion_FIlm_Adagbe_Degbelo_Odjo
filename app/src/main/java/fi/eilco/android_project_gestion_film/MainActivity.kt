@@ -13,6 +13,7 @@ import androidx.appcompat.widget.SearchView
 import com.google.firebase.database.*
 import fi.eilco.android_project_gestion_film.fragments.FavoriteFragment
 import fi.eilco.android_project_gestion_film.fragments.GenreFragment
+import fi.eilco.android_project_gestion_film.fragments.HomeFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, GenreFragment(this, username))
+        transaction.replace(R.id.fragment_container, HomeFragment(this, username))
         transaction.addToBackStack(null)
         transaction.commit()
         connectButton.setOnClickListener{
