@@ -65,10 +65,10 @@
         app:srcCompat="@drawable/ic_heart_filled" />
 
     <ImageView
-        android:id="@+id/back_arrow"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/content_description"
         app:layout_constraintBottom_toTopOf="@+id/fragment_favorite_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"

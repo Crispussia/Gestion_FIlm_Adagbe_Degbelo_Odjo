@@ -16,13 +16,19 @@
         android:theme="@style/Theme.Android_Project_Gestion_Film"
         tools:targetApi="31">
         <activity
+            android:name=".DescriptionActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".FavoriteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".Account"
             android:exported="false">
