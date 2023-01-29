@@ -10,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.database.*
 import fi.eilco.android_project_gestion_film.fragments.FavoriteFragment
 import fi.eilco.android_project_gestion_film.fragments.GenreFragment
@@ -94,6 +96,13 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+        }
+        // connection between menu_burger button and navigationView contained into drawerLayout
+        val drawerLayout: DrawerLayout = findViewById(R.id.container_fragment)
+        val menuIcon = findViewById<ImageView>(R.id.menu_burger)
+
+        menuIcon.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
         }
     }
 
