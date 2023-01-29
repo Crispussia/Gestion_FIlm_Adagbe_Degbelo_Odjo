@@ -13,10 +13,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="7dp"
         android:contentDescription="@string/content_description"
         android:src="@drawable/ic_uservalide"
         android:text="@string/app_name"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/menu_burger"
+        app:layout_constraintEnd_toStartOf="@+id/menu_burger"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:contentDescription="@string/content_description"
         android:src="@drawable/ic_like"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,12 +58,12 @@
         android:textColor="#ffffffff"
         android:textSize="12sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/menu_burger"
 
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/favoris"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textuser"
@@ -179,8 +184,8 @@
         android:layout_width="200dp"
         android:layout_height="45dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:cardMaxElevation="12dp"
+        app:cardElevation="9dp"
+        app:cardMaxElevation="9dp"
         app:cardUseCompatPadding="false"
         app:contentPaddingBottom="0dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
@@ -192,8 +197,8 @@
 
         <SearchView
             android:id="@+id/movie_search"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
             android:layout_gravity="end"
 
             android:queryBackground="@android:color/transparent"
