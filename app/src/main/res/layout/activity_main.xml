@@ -199,7 +199,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.389">
 
-            <SearchView
+            <androidx.appcompat.widget.SearchView
                 android:id="@+id/movie_search"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
@@ -208,8 +208,9 @@
                 android:queryBackground="@android:color/transparent"
                 android:searchIcon="@drawable/ic_search">
 
+            </androidx.appcompat.widget.SearchView>
 
-            </SearchView>
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -218,7 +219,16 @@
         android:id="@+id/genres_navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:background="@color/first_blue"
+        app:drawerLayoutCornerSize="20dp"
+        app:headerLayout="@layout/nav_header_genres"
+
+        app:menu="@menu/menu_genres"
+
+        app:itemTextColor="@color/white"
+        app:itemTextAppearance="@font/montserrat_semibold"
+        android:paddingHorizontal="30dp">
 
     </com.google.android.material.navigation.NavigationView>
 

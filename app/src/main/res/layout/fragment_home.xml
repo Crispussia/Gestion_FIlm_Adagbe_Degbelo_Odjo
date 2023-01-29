@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/current_genre1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/second_blue"
             android:fontFamily="@font/montserrat_light"
             android:radius="20dp"

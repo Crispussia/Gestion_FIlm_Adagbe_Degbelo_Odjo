@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/item_28"
+        android:title="Action"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_12"
+        android:title="Adventure"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_35"
+        android:title="Comedy"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_80"
+        android:title="Crime"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_99"
+        android:title="Documentary"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_18"
+        android:title="Drama"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_10751"
+        android:title="Family"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_14"
+        android:title="Fantasy"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_36"
+        android:title="History"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_27"
+        android:title="Horror"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_10402"
+        android:title="Music"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_9648"
+        android:title="Mystery"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_10749"
+        android:title="Romance"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_10770"
+        android:title="TV Movie"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_53"
+        android:title="Thriller"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_10752"
+        android:title="War"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_37"
+        android:title="Western"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+</menu>

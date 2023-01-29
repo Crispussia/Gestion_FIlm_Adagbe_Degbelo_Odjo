@@ -96,7 +96,7 @@ class GenreFragment(private val context: MainActivity, private val username: Tex
 
     }
     //Go to home fragment
-    fun onClick( genreID: Int,genreName: String) {
+    fun onClick( genreID: Int, genreName: String) {
         setFragmentResult("secret", bundleOf("genre_id" to genreID))
         setFragmentResult("secret2", bundleOf("genre_name" to genreName))
 

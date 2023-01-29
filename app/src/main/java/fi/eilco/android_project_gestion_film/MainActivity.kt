@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import fi.eilco.android_project_gestion_film.fragments.FavoriteFragment
 import fi.eilco.android_project_gestion_film.fragments.GenreFragment
@@ -104,6 +105,27 @@ class MainActivity : AppCompatActivity() {
         menuIcon.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
+
+        // Handle click on one item of NavigationView
+        val navigationView = findViewById<NavigationView>(R.id.genres_navigation_view)
+        navigationView.setNavigationItemSelectedListener {
+                 menuItem ->
+            when (menuItem.itemId) {
+                R.id.item_28 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+
+                }
+                else -> {
+                    // Do nothing
+                }
+            }
+            true
+
+        }
+
     }
 
 
