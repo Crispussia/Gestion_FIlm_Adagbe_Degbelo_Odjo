@@ -39,7 +39,7 @@ class DescriptionActivity : AppCompatActivity() {
         Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeehommmmmehhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"+detailID.toString())
 
 
-        movieImage= findViewById(R.id.imageView)
+        movieImage= findViewById(R.id.image_item)
         overview=findViewById(R.id.movie_overview)
         title=findViewById(R.id.title_movie_description)
         popularity=findViewById(R.id.movie_popularity)
@@ -85,7 +85,7 @@ class DescriptionActivity : AppCompatActivity() {
                             realeseDate.text = realeseDate.text.toString() + data.release_date
                             rate.text = rate.text.toString() + data.vote_average
                             votes.text = votes.text.toString() + data.vote_count
-                            //Glide.with(this@DescriptionActivity).load(Uri.parse("https://image.tmdb.org/t/p/original/"+data.poster_path)).into(movieImage)
+                            Glide.with(this@DescriptionActivity).load(Uri.parse("https://image.tmdb.org/t/p/original/"+data.poster_path)).into(movieImage)
                             overview.text = overview.text.toString() + "\n" + data.overview
                             /* if (username.text.toString()!=""){
 
