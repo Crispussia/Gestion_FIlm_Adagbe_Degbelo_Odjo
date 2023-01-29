@@ -51,8 +51,8 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
         Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+currentMovie.poster_path)).into(holder.movieImage)
 
         holder.movieName.text=currentMovie.original_title
-        holder.movieRate.text=holder.movieRate.text.toString()+" "+currentMovie.vote_average
-        holder.movieVotes.text=holder.movieVotes.text.toString()+" "+currentMovie.vote_count
+        holder.movieRate.text="Rate : "+currentMovie.vote_average
+        holder.movieVotes.text="Votes : "+currentMovie.vote_count
 
         holder.card.setOnClickListener{
 

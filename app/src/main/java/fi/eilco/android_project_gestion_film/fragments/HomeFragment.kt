@@ -1,5 +1,6 @@
 package fi.eilco.android_project_gestion_film.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,30 +10,35 @@ import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
+import fi.eilco.android_project_gestion_film.DescriptionActivity
 import fi.eilco.android_project_gestion_film.MainActivity
 import fi.eilco.android_project_gestion_film.R
 import fi.eilco.android_project_gestion_film.adapter.ItemCardFilmDecoration
 import fi.eilco.android_project_gestion_film.adapter.MovieAdapter
 import fi.eilco.android_project_gestion_film.models.RootModel
-
 import kotlinx.coroutines.launch
 import okhttp3.*
 import java.io.IOException
 
+
 class HomeFragment(private val context: MainActivity, private val username: TextView): Fragment() {
     private lateinit var s: SearchView
+    private lateinit var genre: TextView
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater?.inflate(R.layout.fragment_home, container, false)
         //val view2 = inflater?.inflate(R.layout.activity_main, container, false)
+        if (view != null) {
+            genre=  view.findViewById(R.id.current_genre1)
+        }
 
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
@@ -81,6 +87,7 @@ class HomeFragment(private val context: MainActivity, private val username: Text
 
                     //Set adapter and recycler view on UI with values get from http request
                     activity?.runOnUiThread {
+                        genre.text=genreName
                         recyclerView.layoutManager = LinearLayoutManager(context)
 
                         val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)
@@ -157,12 +164,16 @@ class HomeFragment(private val context: MainActivity, private val username: Text
         setFragmentResult("detailName", bundleOf("genre_name" to movieName))
 
 
-        val fragmentTransaction=this.parentFragmentManager.beginTransaction()
+        /*val fragmentTransaction=this.parentFragmentManager.beginTransaction()
 
         fragmentTransaction.replace(R.id.fragment_container,DetailFragment(context,username))
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         fragmentTransaction.addToBackStack(null)
 
-        fragmentTransaction.commit()
+        fragmentTransaction.commit()*/
+        val intent = Intent(context, DescriptionActivity::class.java)
+        intent.putExtra("detailID", movieID)
+        startActivity(intent)
+
     }
 }

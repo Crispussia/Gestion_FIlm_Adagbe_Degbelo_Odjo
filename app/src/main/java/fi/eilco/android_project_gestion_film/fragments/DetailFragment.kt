@@ -238,16 +238,5 @@ class DetailFragment (private val context: MainActivity, private val username: T
            }
         }
     }
-    fun onClick( genreID: Int,genreName: String) {
-        setFragmentResult("secret", bundleOf("genre_id" to genreID))
-        setFragmentResult("secret2", bundleOf("genre_name" to genreName))
 
-
-        val fragmentTransaction=this.parentFragmentManager.beginTransaction()
-
-        fragmentTransaction.replace(R.id.fragment_container,HomeFragment(context,username))
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-    }
 }
