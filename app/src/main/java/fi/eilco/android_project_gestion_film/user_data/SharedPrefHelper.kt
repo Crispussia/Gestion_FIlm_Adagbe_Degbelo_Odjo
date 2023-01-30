@@ -34,4 +34,9 @@ class SharedPrefHelper(context: Context) {
     fun putBoolean(key: String, value: Boolean) {
         sharedPref.edit().putBoolean(key, value).apply()
     }
+
+    // This method delete preferences. It will be used for deconnexion
+    fun clearSharedPreferences() {
+        sharedPref.edit().clear().apply()
+    }
 }
