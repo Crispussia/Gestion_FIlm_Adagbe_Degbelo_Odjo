@@ -12,6 +12,11 @@
         android:background="@drawable/style_item_navigation_view">
     </item>
 
+    <item android:id="@+id/item_16"
+        android:title="Animation"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
     <item android:id="@+id/item_35"
         android:title="Comedy"
         android:background="@drawable/style_item_navigation_view">
@@ -64,6 +69,11 @@
 
     <item android:id="@+id/item_10749"
         android:title="Romance"
+        android:background="@drawable/style_item_navigation_view">
+    </item>
+
+    <item android:id="@+id/item_878"
+        android:title="Science Foction"
         android:background="@drawable/style_item_navigation_view">
     </item>
 

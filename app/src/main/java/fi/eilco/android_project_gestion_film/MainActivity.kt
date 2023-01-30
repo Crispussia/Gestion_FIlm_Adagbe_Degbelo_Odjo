@@ -23,48 +23,48 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val connectButton=findViewById<ImageView>(R.id.connect)
+        val connectButton = findViewById<ImageView>(R.id.connect)
         //charger notre plant repository
         //injecter le fragment dans la boite (fragment_container)
         //val s=findViewById<SearchView>(R.id.movie_search)
 
-        val username=findViewById<TextView>(R.id.textuser)
-        val favorisButton=findViewById<ImageView>(R.id.favoris)
-        val favorisButtonUser=findViewById<ImageView>(R.id.favoris_user_page)
-        val textbadge=findViewById<TextView>(R.id.textbadge)
-        val connectValidButton=findViewById<ImageView>(R.id.connectValide)
-        var intentUser=intent.getStringExtra("username")
-        val repo=FilmRepository()
+        val username = findViewById<TextView>(R.id.textuser)
+        val favorisButton = findViewById<ImageView>(R.id.favoris)
+        val favorisButtonUser = findViewById<ImageView>(R.id.favoris_user_page)
+        val textbadge = findViewById<TextView>(R.id.textbadge)
+        val connectValidButton = findViewById<ImageView>(R.id.connectValide)
+        var intentUser = intent.getStringExtra("username")
+        val repo = FilmRepository()
         //textAnimals.text="$intentAnimals"
         Log.d("SucessIntent", intentUser.toString())
 
-        if (intentUser.toString()!="null"){
+        if (intentUser.toString() != "null") {
             Log.d("SucessIntent", intentUser.toString())
 
-            connectButton.visibility=View.GONE
+            connectButton.visibility = View.GONE
             connectValidButton.setImageResource(R.drawable.ic_uservalide)
-            connectValidButton.visibility=View.VISIBLE
+            connectValidButton.visibility = View.VISIBLE
             favorisButton.visibility = View.GONE;
-            username.text="$intentUser"
+            username.text = "$intentUser"
             //mettre à jour la liste de plantes
-            repo.updateFavorisImage(username,favorisButtonUser,textbadge)
+            repo.updateFavorisImage(username, favorisButtonUser, textbadge)
 
-        }else{
-            connectValidButton.visibility=View.GONE
-            favorisButtonUser.visibility=View.GONE
-            connectButton.visibility=View.VISIBLE
+        } else {
+            connectValidButton.visibility = View.GONE
+            favorisButtonUser.visibility = View.GONE
+            connectButton.visibility = View.VISIBLE
             favorisButton.visibility = View.VISIBLE;
         }
-        connectValidButton.setOnClickListener{
+        connectValidButton.setOnClickListener {
             val intentMain = Intent(this@MainActivity, Account::class.java)
             intentMain.apply {
-                putExtra("username",username.text)
+                putExtra("username", username.text)
                 startActivity(this)
             }
         }
         //Si on est sur la page d'accueil sans connection de l'utilisateur
-        favorisButton.setOnClickListener{
-            if(username.text.toString()==""){
+        favorisButton.setOnClickListener {
+            if (username.text.toString() == "") {
                 Toast.makeText(
                     this@MainActivity,
                     "Please connect to see your favorite list",
@@ -72,12 +72,12 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
         }
-        favorisButtonUser.setOnClickListener{
+        favorisButtonUser.setOnClickListener {
 
             //var likedlist=repo.getUserLike(username)
             //Log.d("Je ne sais pas", likedlist.toString())
             val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, FavoriteFragment(this,username))
+            transaction.replace(R.id.fragment_container, FavoriteFragment(this, username))
             transaction.addToBackStack(null)
             transaction.commit()
 
@@ -88,19 +88,19 @@ class MainActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")
         val currentGenre = intent.getStringExtra("current_genre")
 
-        if (currentGenre != null){
+        if (currentGenre != null) {
             // We set the new current genre on the activity_main
             this.findViewById<TextView>(R.id.current_genre).text = currentGenre
         }
 
 
         val transaction = supportFragmentManager.beginTransaction()
-       // transaction.replace(R.id.fragment_container, HomeFragment(this, username))
+        // transaction.replace(R.id.fragment_container, HomeFragment(this, username))
         transaction.replace(R.id.fragment_container, HomeFragment(this, username, id))
 
         transaction.addToBackStack(null)
         transaction.commit()
-        connectButton.setOnClickListener{
+        connectButton.setOnClickListener {
             val intentRegister = Intent(this, Login::class.java)
             intentRegister.apply {
                 startActivity(this)
@@ -122,9 +122,37 @@ class MainActivity : AppCompatActivity() {
 
         // This variable will be used to get the title of the current item considering its id
         val menu = navigationView.menu
-        navigationView.setNavigationItemSelectedListener {
-                 menuItem ->
+
+        // Here, we will basically add the event that consist of showing up the activity_main when
+        // clicking on one item. Unfortunately we have to specify what to do for each item seperately
+        navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.item_28 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_28)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We extract the id as a number from item_id
+                    val string = "item_28"
+                    val idGenre = string.substringAfter("_")
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
                 R.id.item_12 -> {
                     // Code to navigate to the main page
                     Log.d("SuccessIntent", "Item clicked")
@@ -135,24 +163,454 @@ class MainActivity : AppCompatActivity() {
                     // We set the new current_genre on activity_main screen
                     val currentGenre = this.findViewById<TextView>(R.id.current_genre)
                     currentGenre.text = title
-                    Log.d("Succcess", "TITLE " + title.toString())
-
-                    val currentGenre2 = this.findViewById<TextView>(R.id.current_genre)
-                    Log.d("Succcess", "NEW GENRE " + currentGenre2.text.toString())
+                    // Log.d("Succcess", "TITLE " + title.toString())
 
                     // We extract the id as a number from item_id
                     val string = "item_12"
-                    val id_genre = string.substringAfter("_")
+                    val idGenre = string.substringAfter("_")
 
-                    Log.d("Success", "IDDDDDDD" + id_genre)
+                    Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("id", id_genre)
+                    intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
                 }
+
+                R.id.item_16 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_16)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We extract the id as a number from item_id
+                    val string = "item_16"
+                    val idGenre = string.substringAfter("_")
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_35 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_35)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We extract the id as a number from item_id
+                    val string = "item_35"
+                    val idGenre = string.substringAfter("_")
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_80 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_80)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We extract the id as a number from item_id
+                    val string = "item_80"
+                    val idGenre = string.substringAfter("_")
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_99 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_99)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We extract the id as a number from item_id
+                    val string = "item_99"
+                    val idGenre = string.substringAfter("_")
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_18 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_18)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We extract the id as a number from item_id
+                    val string = "item_18"
+                    val idGenre = string.substringAfter("_")
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_10751 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_10751)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We extract the id as a number from item_id
+                    val string = "item_10751"
+                    val idGenre = string.substringAfter("_")
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_14 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_14)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We extract the id as a number from item_id
+                    val string = "item_14"
+                    val idGenre = string.substringAfter("_")
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_36 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_36)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "36"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_27 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_27)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "27"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_10402 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_10402)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "10402"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_9648 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_9648)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "9648"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_10749 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_10749)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "10749"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_878 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_878)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "878"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_10770 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_10770)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "10770"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_53 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_53)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "53"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_10752 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_10752)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "10752"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
+                R.id.item_37 -> {
+                    // Code to navigate to the main page
+                    Log.d("SuccessIntent", "Item clicked")
+                    // We get the title of the current id
+                    val menuItem = menu.findItem(R.id.item_37)
+                    val title = menuItem.title
+
+                    // We set the new current_genre on activity_main screen
+                    val currentGenre = this.findViewById<TextView>(R.id.current_genre)
+                    currentGenre.text = title
+                    //Log.d("Succcess", "TITLE " + title.toString())
+
+                    // We put the id as a number from item_id
+                    val idGenre = "37"
+
+                    // Log.d("Success", "IDDDDDDD" + idGenre)
+                    // We start activity_main with the current genre
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("id", idGenre)
+                    intent.putExtra("current_genre", title)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+
+                }
+
                 else -> {
                     // Do nothing
                 }
