@@ -24,6 +24,7 @@ import kotlin.collections.ArrayList
 
 class MovieAdapter(private val context: MainActivity, private val movieList:List<MovieModel>, private val username: TextView, private val movieContext: HomeFragment): RecyclerView.Adapter<MovieAdapter.ViewHolder> (),
     Filterable {
+
     var movieFilterList = movieList
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -46,6 +47,8 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //Récupérer les information d'un film
         val currentMovie=movieFilterList[position]
+        Log.d("hhjjjjjjjjjjjj", "flitttttreeeeeeeeee22bb" +movieList)
+
 
         //utiliser glide pour récupérer l'image du film à partir de son lien
         Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+currentMovie.poster_path)).into(holder.movieImage)
@@ -226,6 +229,10 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
+                Log.d("hhjjjjjjjjjjjj", "flitttttreeeeeeeeee" +"")
+                //Log.d("hhjjjjjjjjjjjj", "flitttttreeeeeeeeee" +movieFilterList)
+
+
                 val charSearch = constraint.toString()
                 if (charSearch.isEmpty()) {
                     movieFilterList = movieList
@@ -239,6 +246,7 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
                         }
                     }
                     movieFilterList = resultList
+
                 }
                 val filterResults = FilterResults()
                 filterResults.values = movieFilterList
