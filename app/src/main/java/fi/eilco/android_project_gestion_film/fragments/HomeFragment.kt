@@ -29,16 +29,16 @@ import java.io.IOException
 
 class HomeFragment(private val context: MainActivity, private val username: TextView, private val id_genre: String?): Fragment() {
     private lateinit var s: SearchView
-    private lateinit var genre: TextView
+    //private lateinit var genre: TextView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater?.inflate(R.layout.fragment_home, container, false)
         //val view2 = inflater?.inflate(R.layout.activity_main, container, false)
-        if (view != null) {
-            genre=  view.findViewById(R.id.current_genre1)
-        }
+        //if (view != null) {
+          //  genre=  view.findViewById(R.id.current_genre1)
+        //}
 
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
@@ -95,8 +95,9 @@ class HomeFragment(private val context: MainActivity, private val username: Text
                     val data = gson.fromJson(body, RootModel::class.java)
 
                     //Set adapter and recycler view on UI with values get from http request
+
                     activity?.runOnUiThread {
-                        genre.text=genreName
+                        //enre.text=genreName
                         recyclerView.layoutManager = LinearLayoutManager(context)
 
                         val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)

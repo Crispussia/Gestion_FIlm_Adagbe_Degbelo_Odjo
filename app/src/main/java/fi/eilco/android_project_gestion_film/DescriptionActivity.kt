@@ -81,10 +81,10 @@ class DescriptionActivity : AppCompatActivity() {
                         //Set adapter and recycler view on UI with values get from http request
                         runOnUiThread {
                             title.text = data.original_title
-                            popularity.text = popularity.text.toString() + data.popularity
-                            realeseDate.text = realeseDate.text.toString() + data.release_date
-                            rate.text = rate.text.toString() + data.vote_average
-                            votes.text = votes.text.toString() + data.vote_count
+                            popularity.text = popularity.text.toString() + "" +  data.popularity
+                            realeseDate.text = realeseDate.text.toString() + "" + data.release_date
+                            rate.text = rate.text.toString() + "" + data.vote_average
+                            votes.text = votes.text.toString() + "" + data.vote_count
                             Glide.with(this@DescriptionActivity).load(Uri.parse("https://image.tmdb.org/t/p/original/"+data.poster_path)).into(movieImage)
                             overview.text = overview.text.toString() + "\n" + data.overview
                             /* if (username.text.toString()!=""){

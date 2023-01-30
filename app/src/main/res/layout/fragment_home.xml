@@ -4,31 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="230dp"
-        android:layout_height="35dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818">
 
-        <TextView
-            android:id="@+id/current_genre1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/second_blue"
-            android:fontFamily="@font/montserrat_light"
-            android:radius="20dp"
-            android:shape="rectangle"
-            android:text="@string/genre_name"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-    </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vertical_recycler_view"
         android:layout_width="match_parent"
