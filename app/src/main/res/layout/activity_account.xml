@@ -152,8 +152,8 @@
             android:textColor="@color/white"
             android:fontFamily="@font/montserrat_light"
             android:textAllCaps="false"
-            android:layout_marginTop="50dp"/>
-            <!--android:background="@drawable/shape_deconnexion_button" --> />
+            android:layout_marginTop="50dp"
+            android:background="@drawable/shape_deconnexion_button" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
