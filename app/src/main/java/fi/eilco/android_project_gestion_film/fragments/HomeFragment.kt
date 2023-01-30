@@ -35,10 +35,7 @@ class HomeFragment(private val context: MainActivity, private val username: Text
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater?.inflate(R.layout.fragment_home, container, false)
-        //val view2 = inflater?.inflate(R.layout.activity_main, container, false)
-        //if (view != null) {
-          //  genre=  view.findViewById(R.id.current_genre1)
-        //}
+        s=context.findViewById(R.id.movie_search)
 
         //recupérer le recycler view
         val recycler = view?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
@@ -102,6 +99,18 @@ class HomeFragment(private val context: MainActivity, private val username: Text
 
                         val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)
                         recyclerView.adapter = adapter
+                        //Function for getting search value
+                        s.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+                                return false
+                            }
+                            //Filter recycler view values
+                            override fun onQueryTextChange(newText: String?): Boolean {
+                                adapter.filter.filter(newText)
+                                return false
+                            }
+
+                        })
 
                     }
 
@@ -128,8 +137,6 @@ class HomeFragment(private val context: MainActivity, private val username: Text
                 println(body)
                 val gson = GsonBuilder().create()
                 val data = gson.fromJson(body, RootModel::class.java)
-                Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeehommmmme" +
-                        "")
 
                 //Set adapter and recycler view on UI with values get from http request
                 activity?.runOnUiThread {
@@ -137,7 +144,7 @@ class HomeFragment(private val context: MainActivity, private val username: Text
 
                     val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)
                     recyclerView.adapter = adapter
-                    /*
+
                     //Function for getting search value
                     s.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                         override fun onQueryTextSubmit(query: String?): Boolean {
@@ -149,7 +156,7 @@ class HomeFragment(private val context: MainActivity, private val username: Text
                             return false
                         }
 
-                    })*/
+                    })
                 }
 
             }
@@ -174,14 +181,6 @@ class HomeFragment(private val context: MainActivity, private val username: Text
         setFragmentResult("detailID", bundleOf("genre_id" to movieID))
         setFragmentResult("detailName", bundleOf("genre_name" to movieName))
 
-
-        /*val fragmentTransaction=this.parentFragmentManager.beginTransaction()
-
-        fragmentTransaction.replace(R.id.fragment_container,DetailFragment(context,username))
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        fragmentTransaction.addToBackStack(null)
-
-        fragmentTransaction.commit()*/
         val intent = Intent(context, DescriptionActivity::class.java)
         intent.putExtra("detailID", movieID)
         startActivity(intent)
