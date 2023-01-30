@@ -27,7 +27,7 @@ import okhttp3.*
 import java.io.IOException
 
 
-class HomeFragment(private val context: MainActivity, private val username: TextView): Fragment() {
+class HomeFragment(private val context: MainActivity, private val username: TextView, private val id_genre: String?): Fragment() {
     private lateinit var s: SearchView
     private lateinit var genre: TextView
 
@@ -64,8 +64,17 @@ class HomeFragment(private val context: MainActivity, private val username: Text
     private fun getData(recyclerView: RecyclerView) {
 
         var genreId: Int = -1
+
+        // With that condition we can movies of the genre selected on the navigationView
+        if (this.id_genre != null){
+            genreId = this.id_genre.toInt()
+            Log.d("Success", "GENRE_IDDDDDD " + genreId.toString())
+        }
+
         var genreName: String = ""
         //s= context.findViewById(R.id.movie_search)
+
+
 
         if (genreId==-1){
             val client = OkHttpClient()
@@ -102,57 +111,58 @@ class HomeFragment(private val context: MainActivity, private val username: Text
         }
 
         Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeehommmmmehhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"+genreId.toString())
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url("https://api.themoviedb.org/3/discover/movie?api_key=2174d146bb9c0eab47529b2e77d6b526&with_genres=" + genreId.toString())
+            .build()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+
+                e.printStackTrace()
+            }
+
+
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body?.string()
+                println(body)
+                val gson = GsonBuilder().create()
+                val data = gson.fromJson(body, RootModel::class.java)
+                Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeehommmmme" +
+                        "")
+
+                //Set adapter and recycler view on UI with values get from http request
+                activity?.runOnUiThread {
+                    recyclerView.layoutManager = LinearLayoutManager(context)
+
+                    val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)
+                    recyclerView.adapter = adapter
+                    /*
+                    //Function for getting search value
+                    s.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            return false
+                        }
+                        //Filter recycler view values
+                        override fun onQueryTextChange(newText: String?): Boolean {
+                            adapter.filter.filter(newText)
+                            return false
+                        }
+
+                    })*/
+                }
+
+            }
+
+        })
+
+
         setFragmentResultListener("secret") { key, bundle ->
             genreId = bundle.getInt("genre_id")
-
 
             setFragmentResultListener("secret2") { key, bundle ->
                 genreName = bundle.getString("genre_name").toString()
 
-
-                val client = OkHttpClient()
-                val request = Request.Builder()
-                    .url("https://api.themoviedb.org/3/discover/movie?api_key=2174d146bb9c0eab47529b2e77d6b526&with_genres=" + genreId.toString())
-                    .build()
-                client.newCall(request).enqueue(object : Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-
-                        e.printStackTrace()
-                    }
-
-
-                    override fun onResponse(call: Call, response: Response) {
-                        val body = response.body?.string()
-                        println(body)
-                        val gson = GsonBuilder().create()
-                        val data = gson.fromJson(body, RootModel::class.java)
-                        Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeehommmmme" +
-                                "")
-
-                        //Set adapter and recycler view on UI with values get from http request
-                        activity?.runOnUiThread {
-                            recyclerView.layoutManager = LinearLayoutManager(context)
-
-                            val adapter = MovieAdapter(context, data.results,username,this@HomeFragment)
-                            recyclerView.adapter = adapter
-                            /*
-                            //Function for getting search value
-                            s.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-                                override fun onQueryTextSubmit(query: String?): Boolean {
-                                    return false
-                                }
-                                //Filter recycler view values
-                                override fun onQueryTextChange(newText: String?): Boolean {
-                                    adapter.filter.filter(newText)
-                                    return false
-                                }
-
-                            })*/
-                        }
-
-                    }
-
-                })
+                Log.d("hhjjjjjjjjjjjj", "NEW_GEEEEEE"+genreId.toString())
 
 
             }

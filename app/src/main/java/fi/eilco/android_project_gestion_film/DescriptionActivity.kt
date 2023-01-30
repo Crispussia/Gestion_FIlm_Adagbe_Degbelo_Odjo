@@ -49,9 +49,9 @@ class DescriptionActivity : AppCompatActivity() {
 
         //like=findViewById(R.id.ic_heart_empty)
 
-            if (detailID != null) {
-                getData(detailID)
-            }
+        if (detailID != null) {
+            getData(detailID)
+        }
 
 
     }

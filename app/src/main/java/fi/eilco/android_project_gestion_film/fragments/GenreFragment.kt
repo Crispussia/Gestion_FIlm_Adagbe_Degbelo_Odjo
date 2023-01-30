@@ -2,7 +2,6 @@ package fi.eilco.android_project_gestion_film.fragments
 
 import fi.eilco.android_project_gestion_film.MainActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -103,7 +102,7 @@ class GenreFragment(private val context: MainActivity, private val username: Tex
 
         val fragmentTransaction=this.parentFragmentManager.beginTransaction()
 
-        fragmentTransaction.replace(R.id.fragment_container,HomeFragment(context,username))
+        fragmentTransaction.replace(R.id.fragment_container, HomeFragment(context, username, null))
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()

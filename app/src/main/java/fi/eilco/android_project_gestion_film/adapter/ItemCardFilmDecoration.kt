@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
 class ItemCardFilmDecoration : ItemDecoration(){
+    // This class is used to set margin on a card film item
     override fun getItemOffsets(
         outRect: Rect,
         view: View,

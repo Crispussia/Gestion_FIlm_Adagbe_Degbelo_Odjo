@@ -227,7 +227,7 @@
         app:menu="@menu/menu_genres"
 
         app:itemTextColor="@color/white"
-        app:itemTextAppearance="@font/montserrat_semibold"
+
         android:paddingHorizontal="30dp">
 
     </com.google.android.material.navigation.NavigationView>
