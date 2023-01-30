@@ -1,5 +1,6 @@
 package fi.eilco.android_project_gestion_film
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,9 +12,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import fi.eilco.android_project_gestion_film.user_data.SharedPrefHelper
 
 class Login : AppCompatActivity() {
     val databaseRef = FirebaseDatabase.getInstance().getReference("users")
+
+    private lateinit var sharedPrefHelper: SharedPrefHelper
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -21,6 +27,15 @@ class Login : AppCompatActivity() {
         val registerButton=findViewById<TextView>(R.id.registerNowBtn)
         val username=findViewById<TextView>(R.id.username_input)
         val password=findViewById<TextView>(R.id.password_input)
+
+        /* Beginning of Testing SharedPrerences for session variables */
+        sharedPrefHelper = SharedPrefHelper(this)
+        val sessionVariable = sharedPrefHelper.getString("session_variable") // -1 is returned when the session variable is not found
+        Log.d("Session Variable testing", "LOGIN_SESSIONNNNNNNNN " + sessionVariable)
+        /* End of Testing SharedPrerences for session variables */
+
+
+
         loginButton.setOnClickListener {
             val usernameText = username.text.toString()
             val passwordText = password.text.toString()

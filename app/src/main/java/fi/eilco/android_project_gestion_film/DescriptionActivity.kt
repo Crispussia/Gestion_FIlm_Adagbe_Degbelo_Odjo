@@ -1,6 +1,7 @@
 package fi.eilco.android_project_gestion_film
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.gson.GsonBuilder
 import fi.eilco.android_project_gestion_film.models.MovieModel
 import fi.eilco.android_project_gestion_film.models.UserModel
+import fi.eilco.android_project_gestion_film.user_data.SharedPrefHelper
 import kotlinx.coroutines.launch
 import okhttp3.*
 import java.io.IOException
@@ -32,11 +34,23 @@ class DescriptionActivity : AppCompatActivity() {
     private lateinit var realeseDate: TextView
     private lateinit var rate: TextView
     private lateinit var votes: TextView
+
+    private lateinit var sharedPrefHelper: SharedPrefHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_description)
         val detailID = intent.getIntExtra("detailID",22)
         Log.d("hhjjjjjjjjjjjj", "eeeeeeeeeehommmmmehhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"+detailID.toString())
+
+        /* Beginning of Testing SharedPrerences for session variables */
+        sharedPrefHelper = SharedPrefHelper(this)
+        val sessionVariable = sharedPrefHelper.getString("session_variable")// -1 is returned when the session variable is not found
+        val sessionVariable2 = sharedPrefHelper.getString("session_var")// -1 is returned when the session variable is not found
+
+        Log.d("Session Variable testing", "DESCRIPTION_SESSIONNNNNNNNN " + sessionVariable.toString())
+        Log.d("Session Variable testing", "DESCRIPTION_SESSIONNNNNNNNN " + sessionVariable2.toString())
+        /* End of Testing SharedPrerences for session variables */
 
 
         movieImage= findViewById(R.id.image_item)

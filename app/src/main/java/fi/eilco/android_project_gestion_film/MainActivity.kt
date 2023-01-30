@@ -1,6 +1,7 @@
 package fi.eilco.android_project_gestion_film
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,10 +16,11 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 import fi.eilco.android_project_gestion_film.fragments.FavoriteFragment
 import fi.eilco.android_project_gestion_film.fragments.HomeFragment
+import fi.eilco.android_project_gestion_film.user_data.SharedPrefHelper
 
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var sharedPrefHelper: SharedPrefHelper
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +84,12 @@ class MainActivity : AppCompatActivity() {
             transaction.commit()
 
         }
+        /* BEGINNING SharedPreferences Testing */
+        sharedPrefHelper = SharedPrefHelper(this)
+        sharedPrefHelper.putString("session_variable", "SharedPreferences WORK !!!")// -1 is returned when the session variable is not found
+        val sess_var = sharedPrefHelper.getString("session_variable")
+        Log.d("Session Variable testing", "Main_SESSIONNNNNNNNN " + sess_var)
+        /* END SharedPreferences Testing */
 
         // Here we handle the case where a new activity_main has been launched when clicking on
         // one of the item of the navigationView
