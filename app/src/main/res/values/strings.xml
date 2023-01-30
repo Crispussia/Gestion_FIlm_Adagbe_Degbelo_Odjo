@@ -37,6 +37,8 @@
 
     <!-- Account Screen -->
     <string name="account_favorites_count_title">Favorites count : </string>
+    <string name="account_username">Username : </string>
+
     <string name="log_out_button">Log out</string>
 
 
