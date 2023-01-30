@@ -139,9 +139,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     //Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_28"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "28"
 
                     // Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
@@ -165,9 +164,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     // Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_12"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "12"
 
                     Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
@@ -191,9 +189,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     //Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_16"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "16"
 
                     // Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
@@ -217,9 +214,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     //Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_35"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "35"
 
                     // Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
@@ -243,9 +239,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     //Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_80"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "80"
 
                     // Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
@@ -269,9 +264,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     //Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_99"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "99"
 
                     // Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
@@ -295,9 +289,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     //Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_18"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "18"
 
                     // Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
@@ -321,9 +314,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     //Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_10751"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "10751"
 
                     // Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
@@ -347,9 +339,8 @@ class MainActivity : AppCompatActivity() {
                     currentGenre.text = title
                     //Log.d("Succcess", "TITLE " + title.toString())
 
-                    // We extract the id as a number from item_id
-                    val string = "item_14"
-                    val idGenre = string.substringAfter("_")
+                    // We put the id as a number from item_id
+                    val idGenre = "14"
 
                     // Log.d("Success", "IDDDDDDD" + idGenre)
                     // We start activity_main with the current genre
