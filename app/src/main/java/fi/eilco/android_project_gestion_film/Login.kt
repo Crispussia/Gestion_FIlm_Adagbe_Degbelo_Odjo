@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
@@ -27,6 +28,12 @@ class Login : AppCompatActivity() {
         val registerButton=findViewById<TextView>(R.id.registerNowBtn)
         val username=findViewById<TextView>(R.id.username_input)
         val password=findViewById<TextView>(R.id.password_input)
+
+        // Go back to the previous activity when clicking on back_arrow
+        val backArrow = findViewById<ImageView>(R.id.back_arrow)
+        backArrow.setOnClickListener{
+            finish()
+        }
 
         /* Beginning of Testing SharedPrerences for session variables */
         sharedPrefHelper = SharedPrefHelper(this)

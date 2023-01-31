@@ -67,7 +67,11 @@ class DescriptionActivity : AppCompatActivity() {
             getData(detailID)
         }
 
-
+        // Go back to the previous activity when clicking on back_arrow
+        val backArrow = findViewById<ImageView>(R.id.back_arrow)
+        backArrow.setOnClickListener{
+            finish()
+        }
     }
 
 
