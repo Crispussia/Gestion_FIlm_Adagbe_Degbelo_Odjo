@@ -38,13 +38,13 @@ class FilmRepository {
                 if (user != null) {
                     likedList=user.liked
                     if (likedList.isNullOrEmpty()){
-                        image.setImageResource(R.drawable.ic_unlike)
-                        image.visibility= View.VISIBLE
+                        image.setImageResource(R.drawable.ic_heart_filled)
+                        //image.visibility= View.VISIBLE
                         badge.visibility=View.GONE
                     }
                    else{
-                        image.setImageResource(R.drawable.ic_like)
-                        image.visibility= View.VISIBLE
+                        image.setImageResource(R.drawable.ic_heart_filled_red)
+                        //image.visibility= View.VISIBLE
                         badge.text= likedList.size.toString()
                         badge.visibility=View.VISIBLE
                    }

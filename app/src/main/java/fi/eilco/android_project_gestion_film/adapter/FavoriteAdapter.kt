@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
+import fi.eilco.android_project_gestion_film.FavoriteActivity
 import fi.eilco.android_project_gestion_film.FilmRepository
 import fi.eilco.android_project_gestion_film.MainActivity
 import fi.eilco.android_project_gestion_film.R
@@ -24,8 +25,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class FavoriteAdapter (
-    private  val context: MainActivity,
-    private val likedList : MutableList<Int>,private val username: TextView, private val movieList:List<MovieModel>,private val favoriteContext: FavoriteFragment
+    private  val context: FavoriteActivity,
+    private val likedList : MutableList<Int>,private val username: TextView, private val movieList:List<MovieModel>
 ): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>()/*,
     Filterable */{
     var favoriteFilterList = movieList
@@ -55,14 +56,16 @@ class FavoriteAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //elle s'actionne pour chacune des identifiants des films likés
+        Log.d("Position",position.toString())
         val currentFilm =movieList[position]
+        Log.d("Length",movieList.size.toString())
         Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+currentFilm.poster_path)).into(holder.movieImage)
 
         holder.movieName.text=currentFilm.original_title
         holder.movieRate.text=holder.movieRate.text.toString()+" "+currentFilm.vote_average
         holder.movieVotes.text=holder.movieVotes.text.toString()+" "+currentFilm.vote_count
 
-        holder.likeIcon.setImageResource(R.drawable.ic_like)
+        holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
         //rajouter une interaction sur cette étoile
         holder.likeIcon.setOnClickListener{
             //var likedlist=repo.getUserLike(username)
@@ -72,12 +75,11 @@ class FavoriteAdapter (
             notifyItemRemoved(position)
             updateLikeList(username,likedList)
 
-
         }
-        holder.card.setOnClickListener{
+        /*holder.card.setOnClickListener{
 
             favoriteContext.onClick(currentFilm.id,currentFilm.original_title)
-        }
+        }*/
 
     }
 

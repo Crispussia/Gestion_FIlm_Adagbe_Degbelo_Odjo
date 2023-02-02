@@ -86,15 +86,15 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
                         }
                         if (list.isNullOrEmpty()) {
 
-                            holder.likeIcon.setImageResource(R.drawable.ic_unlike)
+                            holder.likeIcon.setImageResource(R.drawable.ic_heart_empty)
                         }
                         else{
                             Log.d("bon=============","ssDFGHJs")
                             if (list.contains(currentMovie.id)) {
                                 Log.d("bon=============","sssssss")
-                                holder.likeIcon.setImageResource(R.drawable.ic_like)
+                                holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
                             }else{
-                                holder.likeIcon.setImageResource(R.drawable.ic_unlike)
+                                holder.likeIcon.setImageResource(R.drawable.ic_heart_empty)
                             }
                         }
                     }
@@ -132,11 +132,10 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
                             }
                             //On vérifie bien que la liste des éléments likés n'est pas vide ou null
                             if (likedlist.isNullOrEmpty()) {
-
                                 //Si la liste est nulle on crée une mutable liste qui contient la liste des élements likés
                                 likedlist= mutableListOf(currentMovie.id)
                                 //On met à jour l'icon à like
-                                holder.likeIcon.setImageResource(R.drawable.ic_like)
+                                holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
                                 //On met à jour la liste
                                 updateUser(username,likedlist)
                                 Log.d("Ajout d'un nouvelle", likedlist.toString())
@@ -147,7 +146,7 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
                                     //On le supprime de la liste des éléments likés
                                     likedlist.remove(currentMovie.id)
                                     //On met à jour l'icone
-                                    holder.likeIcon.setImageResource(R.drawable.ic_unlike)
+                                    holder.likeIcon.setImageResource(R.drawable.ic_heart_empty)
                                     //On vérifie que la liste retourner après suppression n'est pas vide
                                     if (likedlist.isNotEmpty()) {
                                         Log.d("Suppression", likedlist.toString())
@@ -164,7 +163,7 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
                                     likedlist.add(currentMovie.id)
                                     Log.d("Ajout", likedlist.toString())
                                     //On met à jour l'icône
-                                    holder.likeIcon.setImageResource(R.drawable.ic_like)
+                                    holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
                                     //On met à jour la Bd
                                     updateUser(username,likedlist)
                                 }

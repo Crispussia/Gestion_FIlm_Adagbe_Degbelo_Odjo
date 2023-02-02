@@ -41,10 +41,6 @@ class HomeFragment(private val context: MainActivity, private val username: Text
         val recycler = view?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
         recycler?.addItemDecoration(ItemCardFilmDecoration())
 
-
-
-
-
         lifecycleScope.launch {
             if (recycler != null) {
                 getData(recycler)

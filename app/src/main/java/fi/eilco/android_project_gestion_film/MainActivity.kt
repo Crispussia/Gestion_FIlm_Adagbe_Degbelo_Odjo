@@ -32,9 +32,9 @@ class MainActivity : AppCompatActivity() {
 
         val username = findViewById<TextView>(R.id.textuser)
         val favorisButton = findViewById<ImageView>(R.id.favoris)
-        val favorisButtonUser = findViewById<ImageView>(R.id.favoris_user_page)
+        //val favorisButtonUser = findViewById<ImageView>(R.id.favoris_user_page)
         val textbadge = findViewById<TextView>(R.id.textbadge)
-        val connectValidButton = findViewById<ImageView>(R.id.connectValide)
+        //val connectValidButton = findViewById<ImageView>(R.id.connectValide)
         var intentUser = intent.getStringExtra("username")
         val repo = FilmRepository()
         //textAnimals.text="$intentAnimals"
@@ -43,28 +43,22 @@ class MainActivity : AppCompatActivity() {
         if (intentUser.toString() != "null") {
             Log.d("SucessIntent", intentUser.toString())
 
-            connectButton.visibility = View.GONE
-            connectValidButton.setImageResource(R.drawable.ic_uservalide)
-            connectValidButton.visibility = View.VISIBLE
-            favorisButton.visibility = View.GONE;
+            //connectButton.visibility = View.GONE
+            connectButton.setImageResource(R.drawable.ic_account_true)
+            //connectValidButton.visibility = View.VISIBLE
+            favorisButton.setImageResource(R.drawable.ic_heart_filled_red);
             username.text = "$intentUser"
             //mettre à jour la liste de plantes
-            repo.updateFavorisImage(username, favorisButtonUser, textbadge)
+            repo.updateFavorisImage(username, favorisButton, textbadge)
 
-        } else {
-            connectValidButton.visibility = View.GONE
-            favorisButtonUser.visibility = View.GONE
-            connectButton.visibility = View.VISIBLE
-            favorisButton.visibility = View.VISIBLE;
         }
-        connectValidButton.setOnClickListener {
-            val intentMain = Intent(this@MainActivity, Account::class.java)
-            intentMain.apply {
-                putExtra("username", username.text)
-                startActivity(this)
-            }
+
+        if (username.text.toString()==""){
+            connectButton.setImageResource(R.drawable.ic_account_false)
         }
         //Si on est sur la page d'accueil sans connection de l'utilisateur
+
+
         favorisButton.setOnClickListener {
             if (username.text.toString() == "") {
                 Toast.makeText(
@@ -72,18 +66,15 @@ class MainActivity : AppCompatActivity() {
                     "Please connect to see your favorite list",
                     Toast.LENGTH_SHORT
                 ).show()
+            }else{
+                val intentRegister = Intent(this@MainActivity, FavoriteActivity::class.java)
+                intentRegister.apply {
+                    putExtra("username",username.text.toString())
+                    startActivity(this)
+                }
             }
         }
-        favorisButtonUser.setOnClickListener {
 
-            //var likedlist=repo.getUserLike(username)
-            //Log.d("Je ne sais pas", likedlist.toString())
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, FavoriteFragment(this, username))
-            transaction.addToBackStack(null)
-            transaction.commit()
-
-        }
         /* BEGINNING SharedPreferences Testing */
         sharedPrefHelper = SharedPrefHelper(this)
         sharedPrefHelper.putString("session_variable", "SharedPreferences WORK !!!")// -1 is returned when the session variable is not found
@@ -109,11 +100,20 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
         connectButton.setOnClickListener {
-            val intentRegister = Intent(this, Login::class.java)
-            intentRegister.apply {
-                startActivity(this)
-            }
+            if (username.text.toString() == "") {
+                val intentRegister = Intent(this, Login::class.java)
+                intentRegister.apply {
+                    startActivity(this)
+                }
 
+            }else{
+                val intentRegister = Intent(this, Account::class.java)
+                intentRegister.apply {
+                    putExtra("username",username.text.toString())
+                    startActivity(this)
+                }
+
+            }
 
         }
 
@@ -155,6 +155,8 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -180,6 +182,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -205,6 +208,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -230,6 +234,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -255,6 +260,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -280,6 +286,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -305,6 +312,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -330,6 +338,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -355,6 +364,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -380,6 +390,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -405,6 +416,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -430,6 +442,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -455,6 +468,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -480,6 +494,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -505,6 +520,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -555,6 +571,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -580,6 +597,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -605,6 +623,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("id", idGenre)
                     intent.putExtra("current_genre", title)
+                    intent.putExtra("username",username.text.toString())
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -617,6 +636,7 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
+
 
     }
 

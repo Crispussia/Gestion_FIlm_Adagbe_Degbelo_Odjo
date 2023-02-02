@@ -1,7 +1,6 @@
 package fi.eilco.android_project_gestion_film.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,19 +14,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
+import fi.eilco.android_project_gestion_film.FavoriteActivity
 import fi.eilco.android_project_gestion_film.FilmRepository.Singleton.likedList
-import fi.eilco.android_project_gestion_film.MainActivity
 import fi.eilco.android_project_gestion_film.R
 import fi.eilco.android_project_gestion_film.adapter.FavoriteAdapter
-import fi.eilco.android_project_gestion_film.adapter.GenreAdapter
-import fi.eilco.android_project_gestion_film.models.GenreRoot
+import fi.eilco.android_project_gestion_film.adapter.ItemCardFilmDecoration
 import fi.eilco.android_project_gestion_film.models.MovieModel
 import kotlinx.coroutines.launch
 import okhttp3.*
 import java.io.IOException
 
-class FavoriteFragment (
-    private  val context: MainActivity,private val username: TextView): Fragment() {
+class FavoriteFragment(
+    private val context: FavoriteActivity, private val username: TextView
+): Fragment() {
     private lateinit var s: SearchView
 
     override fun onCreateView(
@@ -38,8 +37,9 @@ class FavoriteFragment (
 
         val view = inflater?.inflate(R.layout.fragment_collection, container, false)
         //recupérer le recycler view
-        val recycler = view?.findViewById<RecyclerView>(R.id.collection_recycler_list)
-       /* if (view != null) {
+        val recycler = view?.findViewById<RecyclerView>(R.id.vertical_recycler_view)
+        recycler?.addItemDecoration(ItemCardFilmDecoration())
+        /* if (view != null) {
             s=view.findViewById(R.id.favorite_search)
         }*/
 
@@ -81,7 +81,7 @@ class FavoriteFragment (
                 activity?.runOnUiThread {
                     recyclerView.layoutManager= LinearLayoutManager(context)
 
-                    val adapter = FavoriteAdapter(context,likedList,username,movieList,this@FavoriteFragment)
+                    val adapter = FavoriteAdapter(context,likedList,username,movieList)
 
                     recyclerView.adapter = adapter
 
@@ -105,7 +105,9 @@ class FavoriteFragment (
         })}
 
     }
-    fun onClick( movieID: Int,movieName: String) {
+
+    //A revoir
+   /* fun onClick( movieID: Int,movieName: String) {
 
         setFragmentResult("detailID", bundleOf("genre_id" to movieID))
         setFragmentResult("detailName", bundleOf("genre_name" to movieName))
@@ -118,6 +120,6 @@ class FavoriteFragment (
         fragmentTransaction.addToBackStack(null)
 
         fragmentTransaction.commit()
-    }
+    }*/
 
 }

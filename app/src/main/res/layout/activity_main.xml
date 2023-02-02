@@ -11,70 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/connectValide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="7dp"
-            android:contentDescription="@string/content_description"
-            android:src="@drawable/ic_uservalide"
-            android:text="@string/app_name"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/menu_burger"
-            app:layout_constraintEnd_toStartOf="@+id/menu_burger"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/favoris_user_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:contentDescription="@string/content_description"
-            android:src="@drawable/ic_like"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textuser"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textbadge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="72dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/ic_badge"
-            android:gravity="center"
-            android:minWidth="17sp"
-            android:minHeight="17sp"
-            android:padding="2dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingBottom="1dp"
-            android:scaleType="fitStart"
-            android:text="0"
-            android:textColor="#ffffffff"
-            android:textSize="12sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/menu_burger"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/favoris"
-            tools:ignore="MissingConstraints" />
-
         <TextView
             android:id="@+id/textuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text=""
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -117,6 +60,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/second_blue"
                 android:fontFamily="@font/montserrat_light"
+                android:visibility="gone"
                 android:radius="20dp"
                 android:shape="rectangle"
                 android:text="@string/genre_name"
@@ -183,6 +127,23 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.014"
             app:srcCompat="@drawable/ic_heart_filled" />
+
+        <TextView
+            android:id="@+id/textbadge"
+            android:layout_width="18dp"
+            android:layout_height="21dp"
+            android:layout_alignTop="@id/favoris"
+            android:layout_alignRight="@id/favoris"
+            android:visibility="gone"
+            android:background="#ff0000"
+            android:padding="4dp"
+            android:text="5"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="327dp"
+            tools:layout_editor_absoluteY="10dp" />
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="200dp"
