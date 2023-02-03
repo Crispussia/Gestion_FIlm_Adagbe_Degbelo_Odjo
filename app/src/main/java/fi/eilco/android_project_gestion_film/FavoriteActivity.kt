@@ -24,6 +24,7 @@ class FavoriteActivity : AppCompatActivity() {
         if (intentUser.toString() != "null") {
             favorisButton.setImageResource(R.drawable.ic_heart_filled_red);
         }
+
         Log.d("SucessIntent", intentUser.toString())
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_favorite_container, FavoriteFragment(this@FavoriteActivity, username))

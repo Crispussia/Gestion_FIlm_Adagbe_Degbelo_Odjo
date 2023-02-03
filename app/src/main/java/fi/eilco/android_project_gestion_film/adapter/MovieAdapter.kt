@@ -115,7 +115,45 @@ class MovieAdapter(private val context: MainActivity, private val movieList:List
             //On vérifie la présence d'un utilisateur avant d'ajouter des likes
             if (username.text.toString()!="") {
                 Log.d("Bon je suis fatiguée", "Bon je suis fatiguée")
+                /*var likedlist= FilmRepository.Singleton.likedList
+                Log.d("Bon je suis fatiguée", likedlist.toString())
+                likedlist?.forEach { element ->
+                    Log.d("ELEMENT", element.toString())
+                }
+                //On vérifie bien que la liste des éléments likés n'est pas vide ou null
+                if (likedlist.isNullOrEmpty()) {
+                    likedlist= mutableListOf(currentMovie.id)
+                    //On met à jour l'icon à like
+                    holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
+                    Log.d("Ajout d'un nouvelle", likedlist.toString())
+                }else {
+                    //Si la liste contient l'élement liké
+                    if (likedlist.contains(currentMovie.id)) {
+                        //On le supprime de la liste des éléments likés
+                        likedlist.remove(currentMovie.id)
+                        //On met à jour l'icone
+                        holder.likeIcon.setImageResource(R.drawable.ic_heart_empty)
+                        //On vérifie que la liste retourner après suppression n'est pas vide
+                        if (likedlist.isNotEmpty()) {
+                            Log.d("Suppression", likedlist.toString())
+                            //On met à jour l'utilisateur
+                            updateUser(username,likedlist)
+                            // code à exécuter si la liste contient au moins un élément
+                        } else {
+                            Log.d("el supprimer de current", likedlist.toString())
+                            updateUser(username,likedlist)
+                        }
 
+                    }else{
+                        //On ajoute à la liste quand l'élément existe
+                        likedlist.add(currentMovie.id)
+                        Log.d("Ajout", likedlist.toString())
+                        //On met à jour l'icône
+                        holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
+                        //On met à jour la Bd
+                        updateUser(username,likedlist)
+                    }
+                }*/
                 //On récupère la référence de la liste des éléments likés par l'utilisateur
                 val databaseRef= FirebaseDatabase.getInstance().getReference("users").child(username.text.toString())
 
