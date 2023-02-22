@@ -15,4 +15,9 @@ class MovieModel(
 
 
 
-)
+
+) {
+    override fun toString(): String {
+        return "MovieModel(original_title='$original_title', overview='$overview', poster_path='$poster_path', release_date='$release_date', vote_average='$vote_average', vote_count='$vote_count', imageLink='$imageLink', rate='$rate', votes='$votes', id=$id, popularity='$popularity')"
+    }
+}

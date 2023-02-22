@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
+import com.google.gson.Gson
 import fi.eilco.android_project_gestion_film.FavoriteActivity
 import fi.eilco.android_project_gestion_film.FilmRepository
 import fi.eilco.android_project_gestion_film.MainActivity
@@ -23,7 +24,10 @@ import fi.eilco.android_project_gestion_film.models.MovieModel
 import fi.eilco.android_project_gestion_film.models.UserModel
 import java.util.*
 import kotlin.collections.ArrayList
-
+import kotlinx.coroutines.launch
+import okhttp3.*
+import java.io.IOException
+import com.google.gson.GsonBuilder
 class FavoriteAdapter (
     private  val context: FavoriteActivity,
     private val likedList : MutableList<Int>,private val username: TextView, private val movieList:List<MovieModel>
@@ -55,25 +59,13 @@ class FavoriteAdapter (
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //elle s'actionne pour chacune des identifiants des films likés
-        Log.d("Position",position.toString())
 
-        //J'ai mis la manière dont tu récupère les éléments en commentait*/
-        //Ce n'est pas movilistPosition tu dois passer
-        //Moi je récupère les identifiants dans likedList[position]
-        //Tu as as juste passer l'id dans ton api de détails pour avoir les identifiants
-        //Je ne sais pas si cela ce fait
-
-
-
-        /*val currentFilm =movieList[position]
+        val currentFilm =movieList[position]
         Log.d("Length",movieList.size.toString())
         Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+currentFilm.poster_path)).into(holder.movieImage)
-
         holder.movieName.text=currentFilm.original_title
         holder.movieRate.text=holder.movieRate.text.toString()+" "+currentFilm.vote_average
         holder.movieVotes.text=holder.movieVotes.text.toString()+" "+currentFilm.vote_count
-
         holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
         //rajouter une interaction sur cette étoile
         holder.likeIcon.setOnClickListener{
@@ -83,29 +75,11 @@ class FavoriteAdapter (
             Log.d("Current Film",likedList.toString())
             notifyItemRemoved(position)
             updateLikeList(username,likedList)
-
-        }*/
+        }
         /*holder.card.setOnClickListener{
-
             favoriteContext.onClick(currentFilm.id,currentFilm.original_title)
         }*/
 
-        //C'etait mon bout de code au départ avant d'intégrer l'Api qui fonctionnaits
-        val currentFilm =likedList[position]
-
-        holder.movieName.text=currentFilm.toString()
-        holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
-        //rajouter une interaction sur cette étoile
-        holder.likeIcon.setOnClickListener{
-            //var likedlist=repo.getUserLike(username)
-            likedList.remove(currentFilm)
-            Log.d("Current Film",currentFilm.toString())
-            Log.d("Current Film",likedList.toString())
-            notifyItemRemoved(position)
-            updateLikeList(username,likedList)
-
-
-        }
     }
 
     override fun getItemCount(): Int =likedList.size
