@@ -60,13 +60,13 @@
                 android:layout_height="match_parent"
                 android:background="@color/second_blue"
                 android:fontFamily="@font/montserrat_light"
-                android:visibility="gone"
                 android:radius="20dp"
                 android:shape="rectangle"
                 android:text="@string/genre_name"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:visibility="visible" />
         </androidx.cardview.widget.CardView>
 
         <TextView
