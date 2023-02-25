@@ -58,8 +58,8 @@ class FavoriteAdapter(
         Log.d("Length",movieList.size.toString())
         Glide.with(context).load(Uri.parse("https://image.tmdb.org/t/p/original/"+currentFilm.poster_path)).into(holder.movieImage)
         holder.movieName.text=currentFilm.original_title
-        holder.movieRate.text=holder.movieRate.text.toString()+" "+currentFilm.vote_average
-        holder.movieVotes.text=holder.movieVotes.text.toString()+" "+currentFilm.vote_count
+        holder.movieRate.text="Rate : "+currentFilm.vote_average
+        holder.movieVotes.text="Votes : "+currentFilm.vote_count
         holder.likeIcon.setImageResource(R.drawable.ic_heart_filled_red)
         //rajouter une interaction sur cette étoile
         holder.likeIcon.setOnClickListener{
