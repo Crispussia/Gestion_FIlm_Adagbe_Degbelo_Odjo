@@ -24,8 +24,8 @@ import kotlin.collections.ArrayList
 class FavoriteAdapter(
     private val context: FavoriteActivity,
     private val favoriteContext: FavoriteFragment,
-    private val likedList: MutableList<Int>, private val username: TextView, private val movieList:List<MovieModel>
-): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>()/*,
+    private val likedList: MutableList<Int>, private val username: TextView, private val movieList:List<MovieModel>,
+    private var badge:TextView): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>()/*,
     Filterable*/ {
     var favoriteFilterList = movieList
 
@@ -65,6 +65,7 @@ class FavoriteAdapter(
         holder.likeIcon.setOnClickListener{
             //var likedlist=repo.getUserLike(username)
             likedList.remove(likedList[position])
+            badge.text=likedList.size.toString()
             Log.d("Current Film",currentFilm.toString())
             Log.d("Current Film",likedList.toString())
             notifyItemRemoved(position)

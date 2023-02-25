@@ -26,7 +26,7 @@ import okhttp3.*
 import java.io.IOException
 
 class FavoriteFragment(
-    private val context: FavoriteActivity, private val username: TextView
+    private val context: FavoriteActivity, private val username: TextView,private var badge:TextView
 ): Fragment() {
     private lateinit var s: SearchView
 
@@ -82,7 +82,7 @@ class FavoriteFragment(
                 activity?.runOnUiThread {
                     recyclerView.layoutManager= LinearLayoutManager(context)
 
-                    val adapter = FavoriteAdapter(context,this@FavoriteFragment,likedList,username,movieList)
+                    val adapter = FavoriteAdapter(context,this@FavoriteFragment,likedList,username,movieList,badge)
 
                     recyclerView.adapter = adapter
 
