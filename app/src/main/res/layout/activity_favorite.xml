@@ -78,6 +78,25 @@
         app:layout_constraintVertical_bias="0.014"
         app:srcCompat="@drawable/ic_heart_filled" />
 
+    <TextView
+        android:id="@+id/textbadge2"
+        android:layout_width="25sp"
+        android:layout_height="25dp"
+        android:layout_alignTop="@id/favoris"
+        android:layout_alignRight="@id/favoris"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/montserrat_semibold"
+        android:gravity="center|center_vertical"
+        android:text="@string/number_favorite"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/favoris"
+        app:layout_constraintEnd_toEndOf="@+id/favoris"
+        app:layout_constraintStart_toStartOf="@+id/favoris"
+        app:layout_constraintTop_toTopOf="@+id/favoris"
+        tools:ignore="MissingConstraints" />
+
     <ImageView
         android:id="@+id/back_arrow"
         android:layout_width="50dp"

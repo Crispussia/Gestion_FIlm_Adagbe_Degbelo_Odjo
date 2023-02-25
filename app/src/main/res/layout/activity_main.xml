@@ -17,10 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text=""
-            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/second_blue"
-                android:fontFamily="@font/montserrat_light"
+                android:fontFamily="@font/montserrat_semibold"
                 android:radius="20dp"
                 android:shape="rectangle"
                 android:text="@string/genre_name"
@@ -128,22 +128,6 @@
             app:layout_constraintVertical_bias="0.014"
             app:srcCompat="@drawable/ic_heart_filled" />
 
-        <TextView
-            android:id="@+id/textbadge"
-            android:layout_width="18dp"
-            android:layout_height="21dp"
-            android:layout_alignTop="@id/favoris"
-            android:layout_alignRight="@id/favoris"
-            android:visibility="gone"
-            android:background="#ff0000"
-            android:padding="4dp"
-            android:text="5"
-            android:textColor="#ffffff"
-            android:textSize="12sp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="327dp"
-            tools:layout_editor_absoluteY="10dp" />
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="200dp"
@@ -173,6 +157,25 @@
 
 
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textbadge"
+            android:layout_width="25sp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/favoris"
+            android:layout_alignRight="@id/favoris"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/montserrat_semibold"
+            android:gravity="center|center_vertical"
+            android:text="@string/number_favorite"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/favoris"
+            app:layout_constraintEnd_toEndOf="@+id/favoris"
+            app:layout_constraintStart_toStartOf="@+id/favoris"
+            app:layout_constraintTop_toTopOf="@+id/favoris"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

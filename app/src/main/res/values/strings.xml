@@ -41,7 +41,7 @@
 
     <string name="log_out_button">Log out</string>
 
-
+    <string name="number_favorite">0</string>
     <string name="content_description">Film Image</string>
 
 </resources>
