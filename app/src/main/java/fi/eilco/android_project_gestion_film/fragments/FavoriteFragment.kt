@@ -1,5 +1,6 @@
 package fi.eilco.android_project_gestion_film.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,12 @@ import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
+import fi.eilco.android_project_gestion_film.DescriptionActivity
 import fi.eilco.android_project_gestion_film.FavoriteActivity
 import fi.eilco.android_project_gestion_film.FilmRepository.Singleton.likedList
 import fi.eilco.android_project_gestion_film.R
@@ -81,7 +82,7 @@ class FavoriteFragment(
                 activity?.runOnUiThread {
                     recyclerView.layoutManager= LinearLayoutManager(context)
 
-                    val adapter = FavoriteAdapter(context,likedList,username,movieList)
+                    val adapter = FavoriteAdapter(context,this@FavoriteFragment,likedList,username,movieList)
 
                     recyclerView.adapter = adapter
 
@@ -106,20 +107,16 @@ class FavoriteFragment(
 
     }
 
-    //A revoir
-   /* fun onClick( movieID: Int,movieName: String) {
+
+    fun onClick( movieID: Int,movieName: String) {
 
         setFragmentResult("detailID", bundleOf("genre_id" to movieID))
         setFragmentResult("detailName", bundleOf("genre_name" to movieName))
 
+        val intent = Intent(context, DescriptionActivity::class.java)
+        intent.putExtra("detailID", movieID)
+        startActivity(intent)
 
-        val fragmentTransaction=this.parentFragmentManager.beginTransaction()
-
-        fragmentTransaction.replace(R.id.fragment_container,DetailFragment(context,username))
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        fragmentTransaction.addToBackStack(null)
-
-        fragmentTransaction.commit()
-    }*/
+    }
 
 }

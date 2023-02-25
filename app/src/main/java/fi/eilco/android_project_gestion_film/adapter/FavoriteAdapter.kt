@@ -13,26 +13,20 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
-import com.google.gson.Gson
 import fi.eilco.android_project_gestion_film.FavoriteActivity
-import fi.eilco.android_project_gestion_film.FilmRepository
-import fi.eilco.android_project_gestion_film.MainActivity
 import fi.eilco.android_project_gestion_film.R
-import fi.eilco.android_project_gestion_film.fragments.FavoriteFragment
-import fi.eilco.android_project_gestion_film.models.GenreModel
 import fi.eilco.android_project_gestion_film.models.MovieModel
 import fi.eilco.android_project_gestion_film.models.UserModel
+import fi.eilco.android_project_gestion_film.fragments.FavoriteFragment
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlinx.coroutines.launch
-import okhttp3.*
-import java.io.IOException
-import com.google.gson.GsonBuilder
-class FavoriteAdapter (
-    private  val context: FavoriteActivity,
-    private val likedList : MutableList<Int>,private val username: TextView, private val movieList:List<MovieModel>
+
+class FavoriteAdapter(
+    private val context: FavoriteActivity,
+    private val favoriteContext: FavoriteFragment,
+    private val likedList: MutableList<Int>, private val username: TextView, private val movieList:List<MovieModel>
 ): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>()/*,
-    Filterable */{
+    Filterable*/ {
     var favoriteFilterList = movieList
 
     fun removeAt(position: Int) {
@@ -76,9 +70,10 @@ class FavoriteAdapter (
             notifyItemRemoved(position)
             updateLikeList(username,likedList)
         }
-        /*holder.card.setOnClickListener{
+
+        holder.card.setOnClickListener{
             favoriteContext.onClick(currentFilm.id,currentFilm.original_title)
-        }*/
+        }
 
     }
 
@@ -111,34 +106,39 @@ class FavoriteAdapter (
     }
 
 
-    /* override fun getFilter(): Filter {
-         return object : Filter() {
-             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                 val charSearch = constraint.toString()
-                 if (charSearch.isEmpty()) {
-                     likedFilterList = likedList
-                 } else {
-                     val resultList = ArrayList<GenreModel>()
-                     for (row in likedList) {
-                         if (row.name.lowercase(Locale.ROOT)
-                                 .contains(charSearch.lowercase(Locale.ROOT))
-                         ) {
-                             resultList.add(row)
-                         }
-                     }
-                     likedFilterList = resultList
-                 }
-                 val filterResults = FilterResults()
-                 filterResults.values = genreFilterList
-                 return filterResults
-             }
+    /*override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                Log.d("hhjjjjjjjjjjjj", "flitttttreeeeeeeeee" +"")
+                //Log.d("hhjjjjjjjjjjjj", "flitttttreeeeeeeeee" +movieFilterList)
 
-             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                 likedFilterList = results?.values as ArrayList<GenreModel>
-                 notifyDataSetChanged()            }
 
-         }
-     }*/
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    favoriteFilterList = movieList
+                } else {
+                    val resultList = ArrayList<MovieModel>()
+                    for (row in movieList) {
+                        if (row.original_title.lowercase(Locale.ROOT)
+                                .contains(charSearch.lowercase(Locale.ROOT))
+                        ) {
+                            resultList.add(row)
+                        }
+                    }
+                    favoriteFilterList = resultList
 
+                }
+                val filterResults = FilterResults()
+                filterResults.values = favoriteFilterList
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                favoriteFilterList = results?.values as ArrayList<MovieModel>
+                notifyDataSetChanged()
+            }
+
+        }
+    }*/
 
 }
